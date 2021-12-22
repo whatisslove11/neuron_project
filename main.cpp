@@ -32,7 +32,7 @@ int validation(string name, int value) {
     int accuracy_or_test;
     while (flag) {
         cout << "Enter count of " << name << " (no more than " << value << "): "; cin >> accuracy_or_test;
-        if (accuracy_or_test > value || accuracy_or_test - (int)accuracy_or_test > 0) {
+        if (accuracy_or_test > value || accuracy_or_test < 0) {
             cout << "Bad data. Please, try again\n";
         }
         else {
