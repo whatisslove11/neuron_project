@@ -27,6 +27,22 @@ int getIndex(int x, int y, int step) { //find links benwwen (n-1) layer and n la
     return y * step + x;
 }
 
+int validation(string name, int value) {
+    bool flag = true;
+    int accuracy_or_test;
+    while (flag) {
+        cout << "Enter count of " << name << " (no more than " << value << "): "; cin >> accuracy_or_test;
+        if (accuracy_or_test > value || accuracy_or_test - (int)accuracy_or_test > 0) {
+            cout << "Bad data. Please, try again\n";
+        }
+        else {
+            flag = false;
+        }
+
+    }
+    return accuracy_or_test;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////// PNG to digit map
 #define STB_IMAGE_IMPLEMENTATION    // activate realisation
 #define STBI_ONLY_PNG   // only for PNG
@@ -199,23 +215,13 @@ int main()
     if (humanChoise == "train")
     {
         ////////////////////////////////////////////////////////////////////////////////////// TRAINING
-        cout << "Enter count of training (no more than 60.000): "; //мб поменять нахуй?
+ 
 
         int count_of_training;
-        cin >> count_of_training;
+        count_of_training = validation("training", 60000);
 
-        if (count_of_training > 60000) {
-            cout << "Bad data!";
-            return -1;
-        }
-        cout << '\n';
         int count_of_test_accuracy;
-        cout << "Enter count of test accuracy (no more than 10.000): "; cin >> count_of_test_accuracy; cout << '\n';
-
-        if (count_of_test_accuracy > 10000) {
-            cout << "Bad data!";
-            return -1;
-        }
+        count_of_test_accuracy = validation("test accuracy", 10000);
 
 
         double total_accuracy;
