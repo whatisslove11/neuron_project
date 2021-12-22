@@ -636,7 +636,7 @@ int main()
                 }
                 ///////////////////////// make the verdict
 
-                cout << "============It IS: " << verdict << "\n\n";
+                cout << "\n---------------------> It is: " << verdict << "\n\n";
 
 
             }
