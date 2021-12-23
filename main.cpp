@@ -95,6 +95,9 @@ private:
 
 int main()
 {
+
+    HDC hDC = GetDC(GetConsoleWindow()); // for drawing graphics
+
     const short int percepteronNeurons = 784;
 
     ////////////////////////////////////////////////////////////////////////////////////// initialization weights & layers
@@ -106,6 +109,8 @@ int main()
     vector <double> weights2((28 * 28 + 10) * 10); // all links hiddenLayer <-> finalLayer
 
     ////////////////////////////////////////////////////////////////////////////////////// initialization weights & layers
+
+    vector<double>graphics; string graph; string graphFlag;
 
     cout << "Create random weights or load \"The best weights\"? (create/load):  ";
     string weightsFlag;
@@ -335,14 +340,16 @@ int main()
             if (verdict == right_answer)  count_of_succsess++;
             else count_of_errors++;
 
-            if (count_of_errors + count_of_succsess == 2000)
-            {
+            if (count_of_errors + count_of_succsess == count_of_training/20) {
+                graphics.push_back(250*static_cast<double>(count_of_succsess) / (count_of_succsess + count_of_errors));  
                 cout << "train #: " << now_training_number + 2 << '/' << count_of_training << "  ";
-                cout << "\tsuccess rate (last 2000): " << static_cast<double>(count_of_succsess) / (count_of_succsess + count_of_errors) << '\n';
+                cout << "\tsuccess rate (last 5% of dataset): " << static_cast<double>(count_of_succsess) / (count_of_succsess + count_of_errors) << '\n';
                 count_of_succsess = 0;
                 count_of_errors = 0;
-
             }
+
+            
+            
             ///////////////////////// statistics output
 
 
@@ -385,7 +392,18 @@ int main()
 
         }  // Main cycle of training (the end)
 
-        cout << '\n';
+        if (weightsFlag == "create") {
+            cout << "Do you want to see the graphic (y/n): ";
+            cin >> graph;
+            if (graph == "y") {
+                system("cls");
+                drawGraphics(hDC, graphics);
+                cout << "If you want to quit, plesae, press y: "; cin >> graphFlag;
+                if (graphFlag == "y") clear(hDC);
+            }
+        }
+
+
         cout << "The end of training, the beginning of accuracy calculations...." << '\n';
 
         //////////////////////////////////////////////////////// calculation accuracy
@@ -475,6 +493,7 @@ int main()
 
             if (test_right_answer = verdict) count_right_answers++;
             else count_wrong_answers++;
+               
 
             if (count_right_answers + count_wrong_answers == 500) {
 

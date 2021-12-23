@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="char_to _int.cpp" />
+    <ClCompile Include="clear.cpp" />
+    <ClCompile Include="graphics.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sigmoid_or_ReLU.cpp" />
   </ItemGroup>
