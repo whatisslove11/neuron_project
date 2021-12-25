@@ -1,6 +1,6 @@
 #include <Windows.h>
 
-void clear(HDC hdc)// рисуем поверх всего черный прямоугольник (очищаем консоль и рисуем все заново)
+void clear(HDC hdc)
 {
     Sleep(1500);
     HPEN hpen = CreatePen(PS_SOLID, 2, RGB(0, 0, 0));
